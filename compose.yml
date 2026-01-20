@@ -1,0 +1,37 @@
+services:
+  web:
+    build: apache
+    ports:
+      - 80:80
+    volumes:
+      - ./apache/tarefa1.conf:/etc/apache2/sites-enabled/tarefa1.conf
+      - ./exemplo.lan:/opt/web/exemplo.lan
+
+    networks:
+      redeapache:
+        aliases:
+          - exemplo.lan
+          - www.exemplo.lan
+
+    # Reiniciar automáticamente cuando hay un cambio en test1.conf
+    develop:
+      watch:
+        - path: ./apache/test1.conf
+          action: restart
+
+  cliente:
+    image: a24aquilespv/cliente_firefox
+    hostname: cliente
+    networks:
+      - redeapache
+
+    # Indicar el monitor que debe emplear X11 para mostrar la salida
+    environment:
+      - DISPLAY=${DISPLAY}
+    
+    # Socket temporal que crea X11
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+
+networks:
+  redeapache:
