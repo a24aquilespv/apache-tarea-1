@@ -1,0 +1,5 @@
+Options +Indexes
+
+# Si se quita Nonfatal=Override devuelve un 500 Internal Server Error
+# Esta directiva no es necesaria, solo está para comprobar que Nonfata funciona
+DirectoryIndex sample.png
