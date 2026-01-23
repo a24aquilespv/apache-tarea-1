@@ -13,10 +13,10 @@ services:
           - exemplo.lan
           - www.exemplo.lan
 
-    # Reiniciar automáticamente cuando hay un cambio en test1.conf
+    # Reiniciar automáticamente cuando hay un cambio en tarefa1.conf
     develop:
       watch:
-        - path: ./apache/test1.conf
+        - path: ./apache/tarefa1.conf
           action: restart
 
   cliente:
